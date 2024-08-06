@@ -10,25 +10,25 @@ namespace CalculatorCore.Visitors
 {
     internal class InfixVisitor : AryNodeVisitor
     {
-        public StringBuilder Infix { get; private set; } = new();
+        public StringBuilder Inorder { get; private set; } = new();
         public override void Visit(NullaryExpressionTreeNode node)
         {
-            Infix.Append(node.Text);
+            Inorder.Append(node.Text);
         }
 
         public override void Visit(UnaryExpressionTreeNode node)
         {
-            Infix.Append(node.Text);
-            Infix.Append(" ");
+            Inorder.Append(node.Text);
+            Inorder.Append(" ");
             node.Child!.AryNodeAccept(this);
         }
 
         public override void Visit(BinaryExpressionTreeNode node)
         {
             node.Left!.AryNodeAccept(this);
-            Infix.Append(" ");
-            Infix.Append(node.Text);
-            Infix.Append(" ");
+            Inorder.Append(" ");
+            Inorder.Append(node.Text);
+            Inorder.Append(" ");
             node.Right!.AryNodeAccept(this);
         }
     }

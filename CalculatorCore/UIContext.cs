@@ -5,18 +5,18 @@ namespace CalculatorCore
     {
         public string Input { get; set; } = Constants.ZERO;
         public string Output { get; set; } = string.Empty;
-        public string Prefix { get; set; } = string.Empty;
-        public string Infix { get; set; } = string.Empty;
+        public string Preorder { get; set; } = string.Empty;
+        public string Inorder { get; set; } = string.Empty;
         public string Postfix { get; set; } = string.Empty;
 
         public Dictionary<string, bool> Enables { get; set; } = new();
         public UIContext() { }
-        internal UIContext(string input, string output, string prefix, string infix, string postfix, bool isNotError)
+        internal UIContext(string input, string output, string preorder, string inorder, string postfix, bool isNotError)
         {
             Input = input;
             Output = output;
-            Prefix = prefix;
-            Infix = infix;
+            Preorder = preorder;
+            Inorder = inorder;
             Postfix = postfix;
             Enables["+"] = isNotError;
             Enables["-"] = isNotError;

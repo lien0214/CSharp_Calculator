@@ -45,9 +45,9 @@ namespace CalculatorCore
             return new UIContext(
                 Context.Input,
                 Context.Output,
-                Context.Prefix(),
-                Context.Infix(),
-                Context.Postfix(),
+                Context.Preorder(),
+                Context.Inorder(),
+                Context.Postorder(),
                 State != Maps.StateMap[StateType.ErrorState]
             );
         }

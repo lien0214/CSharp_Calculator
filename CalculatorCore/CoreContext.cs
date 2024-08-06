@@ -8,22 +8,55 @@ using System.Text;
 namespace CalculatorCore
 {
     /// <summary>
-    /// 
+    /// CoreContext is the main class that holds the state and Value of the calculator.
     /// </summary>
     internal class CoreContext
     {
-        public List<ExpressionTreeNode> NodeList { get; set; } = [];
-        public List<ExpressionTreeNode> OperatorList { get; set; } = [];
-        public int NetParenthesesCount { get; set; } = 0;
-        public EqualTreeNode? EqualNode { get; set; } = null;
+        /// <summary>
+        /// NodeList is a list of ExpressionTreeNode that holds the nodes of the expression tree.
+        /// </summary>
+        public List<ExpressionTreeNode> NodeList { get; set; }
+
+        /// <summary>
+        /// OperatorList is a list of ExpressionTreeNode that holds the operators of the expression tree.
+        /// </summary>
+        public List<ExpressionTreeNode> OperatorList { get; set; }
+
+        /// <summary>
+        /// NetParenthesesCount is the number of parentheses that are not closed.
+        /// </summary>
+        public int NetParenthesesCount { get; set; }
+
+        /// <summary>
+        /// EqualNode is the node that holds the equal sign.
+        /// </summary>
+        public EqualTreeNode? EqualNode { get; set; }
         
-        public IState State { get; set; } = Maps.StateMap[StateType.InitialState];
+        /// <summary>
+        /// State is the current state of the calculator.
+        /// </summary>
+        public IState State { get; set; }
 
-        public string Input { get; set; } = Constants.ZERO;
+        /// <summary>
+        /// Input is the current input of the calculator.
+        /// </summary>
+        public string Input { get; set; }
+
+        /// <summary>
+        /// InputDecimal is the decimal representation of the input.
+        /// </summary>
         public decimal InputDecimal { get => StringHandling.StringtoDecimal(Input); }
-        public string Output { get; set; } = string.Empty;
 
-        public string Prefix()
+        /// <summary>
+        /// Output is the output of the calculator.
+        /// </summary>
+        public string Output { get; set; }
+
+        /// <summary>
+        /// Preorder returns the preorder notation of the expression tree.
+        /// </summary>Infix
+        /// <returns>The preorder string of the Last tree in the List</returns>
+        public string Preorder()
         {
             PrefixVisitor visitor = new();
             if (NodeList.Count == 0)
@@ -31,10 +64,14 @@ namespace CalculatorCore
                 return string.Empty;
             }
             NodeList[^1].AryNodeAccept(visitor);
-            return visitor.Prefix.ToString();
+            return visitor.Preorder.ToString();
         }
 
-        public string Infix()
+        /// <summary>
+        /// Inorder returns the inorder notation of the expression tree.
+        /// </summary>
+        /// <returns>The inorder string of the Last tree in the List</returns>
+        public string Inorder()
         {
            InfixVisitor visitor = new();
             if (NodeList.Count == 0)
@@ -42,10 +79,14 @@ namespace CalculatorCore
                 return string.Empty;
             }
             NodeList[^1].AryNodeAccept(visitor);
-            return visitor.Infix.ToString();
+            return visitor.Inorder.ToString();
         }
 
-        public string Postfix()
+        /// <summary>
+        /// Postorder returns the postorder notation of the expression tree.
+        /// </summary>
+        /// <returns>The postorder string of the Last tree in the List</returns>
+        public string Postorder()
         {
             PostfixVisitor visitor = new();
             if (NodeList.Count == 0)
@@ -56,21 +97,34 @@ namespace CalculatorCore
             return visitor.Postfix.ToString();
         }
 
+        public CoreContext()
+        {
+            NodeList = [];
+            OperatorList = [];
+            NetParenthesesCount = 0;
+            EqualNode = null;
+            State = Maps.StateMap[StateType.InitialState];
+            Input = Constants.ZERO;
+            Output = string.Empty;
+        }
 
-
-        public CoreContext() { }
-
+        /// <summary>
+        /// Clear clears the state of the calculator.
+        /// </summary>
         public void Clear()
         {
             NodeList.Clear();
             OperatorList.Clear();
+            NetParenthesesCount = 0;
+            EqualNode = null;
             State = Maps.StateMap[StateType.InitialState];
             Input = Constants.ZERO;
             Output = string.Empty;
-            NetParenthesesCount = 0;
-            EqualNode = null;
         }
 
+        /// <summary>
+        /// Stores EqualTreeNode, clears the state of the calculator and resets the state to InitialState.
+        /// </summary>
         public void EqualClear()
         {
             ExpressionTreeNode equalTreeNode = TrimTreeHeight(NodeList[^1], 2)!;
@@ -78,7 +132,13 @@ namespace CalculatorCore
             EqualNode = (EqualTreeNode)equalTreeNode!;
         }
 
-        public int OperatorCompare(char op1, char op2)
+        /// <summary>
+        /// Compare the precedence of two operators.
+        /// </summary>
+        /// <param name="op1">Operand on left-hand side</param>
+        /// <param name="op2">Operand on right-hand side</param>
+        /// <returns>return the precedence subtraction of two operators.</returns>
+        public static int OperatorCompare(char op1, char op2)
         {
             Dictionary<char, int> OperatorPrecedence = new()
             {
@@ -93,8 +153,14 @@ namespace CalculatorCore
             return OperatorPrecedence[op2] - OperatorPrecedence[op1];
         }
 
+        /// <summary>
+        /// NumberNodePush creates a NumberTreeNode and adds it to the NodeList.
+        /// </summary>
         public void NumberNodePush() => NodeList.Add(new NumberTreeNode(string.Empty, Input, InputDecimal));
 
+        /// <summary>
+        /// MergeBinary merges two nodes with one binary operator node.
+        /// </summary>
         public void MergeBinary()
         {
             ExpressionTreeNode op = OperatorList[OperatorList.Count - 1];
@@ -110,6 +176,10 @@ namespace CalculatorCore
             NodeList.Add(node);
         }
 
+        /// <summary>
+        /// Removes the last operator from the OperatorList and adds a new ParenthesesTreeNode to the NodeList.
+        /// The new node is created with the left and right parentheses and the last node from the NodeList as its child.
+        /// </summary>
         public void AddParenthesesPair()
         {
             OperatorList.RemoveAt(OperatorList.Count - 1);
@@ -118,7 +188,11 @@ namespace CalculatorCore
             NodeList[^1] = new ParenthesesTreeNode(string.Empty, text, childNode.Value, childNode);
             NetParenthesesCount--;
         }
-        
+
+        /// <summary>
+        /// Handles the insertion of a right parenthesis by merging binary nodes until a left parenthesis is found
+        /// and then calls AddParenthesesPair to properly encapsulate the expression within parentheses.
+        /// </summary>
         public void HandleRightParenthesis()
         {
             while (OperatorList.Count > 0 && OperatorList[^1].Text != Constants.LEFT_PARENTHESIS.ToString())
@@ -128,6 +202,10 @@ namespace CalculatorCore
             AddParenthesesPair();
         }
 
+        /// <summary>
+        /// Handles the equal operation by either finalizing the existing EqualNode or merging all operators
+        /// and then creating a new EqualTreeNode with the result.
+        /// </summary>
         public void HandleEqual()
         {
             if (EqualNode != null)
@@ -162,12 +240,22 @@ namespace CalculatorCore
             NodeList[^1] = new EqualTreeNode(string.Empty, equalText, equalChild.Value, equalChild);
         }
 
+        /// <summary>
+        /// Adds a new BinaryExpressionTreeNode to the OperatorList with the specified operator character.
+        /// Sets the EqualNode to null.
+        /// </summary>
         public void OperatorListAdd(char op)
         {
             OperatorList.Add(new BinaryExpressionTreeNode(string.Empty, op.ToString(), 0, null, null));
             EqualNode = null;
         }
 
+        /// <summary>
+        /// Trims the height of the expression tree to the specified target height.
+        /// </summary>
+        /// <param name="root">The root node of the tree to trim.</param>
+        /// <param name="targetHeight">The target height to trim the tree to.</param>
+        /// <returns>The trimmed tree node.</returns>
         public static ExpressionTreeNode? TrimTreeHeight(ExpressionTreeNode? root, int targetHeight)
         {
             if (root == null || targetHeight < 0)
@@ -198,6 +286,10 @@ namespace CalculatorCore
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Generates the output string of the expression tree by traversing the NodeList and OperatorList.
+        /// </summary>
+        /// <returns>The output string representing the expression tree.</returns>
         public string GetOutput()
         {
             int nodeIndex = 0;

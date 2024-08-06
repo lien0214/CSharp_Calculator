@@ -28,8 +28,8 @@ namespace Calculator
         {
             LabelHelper.Render(OutputLabel, UIController.UIContext.Output);
             LabelHelper.Render(InputLabel, UIController.UIContext.Input);
-            LabelHelper.Render(PrefixLabel, UIController.UIContext.Prefix);
-            LabelHelper.Render(InfixLabel, UIController.UIContext.Infix);
+            LabelHelper.Render(PrefixLabel, UIController.UIContext.Preorder);
+            LabelHelper.Render(InfixLabel, UIController.UIContext.Inorder);
             LabelHelper.Render(PostfixLabel, UIController.UIContext.Postfix);
             ButtonHelper.Render(Buttons, UIController.UIContext.Enables, buttonText);
         }

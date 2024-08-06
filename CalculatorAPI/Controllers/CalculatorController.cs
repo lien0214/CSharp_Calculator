@@ -45,18 +45,19 @@ namespace CalculatorAPI.Controllers
             { "±", new NegateClick() }
         };
 
-        private readonly ILogger<CalculatorController> _logger;
-        private readonly CoreControl CoreController;
+        private readonly ILogger<CalculatorController> Logger;
+
+        private readonly CoreControl CoreControl;
 
         /// <summary>
         /// Initializes a new instance of the CalculatorController class.
         /// </summary>
         /// <param name="logger">Logger instance for logging.</param>
-        /// <param name="coreController">Core controller for calculator logic.</param>
-        public CalculatorController(ILogger<CalculatorController> logger, CoreControl coreController)
+        /// <param name="coreControl">Core controller for calculator logic.</param>
+        public CalculatorController(ILogger<CalculatorController> logger, CoreControl coreControl)
         {
-            _logger = logger;
-            CoreController = coreController;
+            Logger = logger;
+            CoreControl = coreControl;
         }
 
         /// <summary>
@@ -69,7 +70,7 @@ namespace CalculatorAPI.Controllers
         {
             try
             {
-                return Ok(buttonText2Click[buttonText].Click(CoreController, buttonText));
+                return Ok(buttonText2Click[buttonText].Click(CoreControl, buttonText));
             }
             catch
             {
