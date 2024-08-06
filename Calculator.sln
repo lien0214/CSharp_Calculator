@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculatorAPI", "Calculator
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculatorCore", "CalculatorCore\CalculatorCore.csproj", "{07411C46-4D32-4EC7-9F63-03FF612D525E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5B1AC70A-F7EC-43FF-B68B-B0F3E99AFD44}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{86907624-0ED8-48E2-8E34-8FDEC30D3AFE}"
 	ProjectSection(SolutionItems) = preProject
-		Readme.md = Readme.md
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
