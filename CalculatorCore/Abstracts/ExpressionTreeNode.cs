@@ -1,4 +1,6 @@
-﻿namespace CalculatorCore.Abstracts
+﻿using CalculatorCore.Interfaces;
+
+namespace CalculatorCore.Abstracts
 {
     internal abstract class ExpressionTreeNode
     {
@@ -20,7 +22,7 @@
         public ExpressionTreeNode(string text, decimal value) : this(string.Empty, text, value) { }
         public ExpressionTreeNode(string text) : this(string.Empty, text, 0) { }
 
-        public abstract void RealNodeAccept(RealNodeVisitor visitor);
-        public abstract void AryNodeAccept(AryNodeVisitor visitor);
+        public abstract void RealNodeAccept(IRealNodeVisitor visitor);
+        public abstract void AryNodeAccept(IAryNodeVisitor visitor);
     }
 }   

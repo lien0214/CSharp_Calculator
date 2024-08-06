@@ -1,34 +1,30 @@
-﻿using CalculatorCore.Abstracts;
-using CalculatorCore.ExpressionTreeNodes.AryTreeNodes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using CalculatorCore.ExpressionTreeNodes.AryTreeNodes;
+using CalculatorCore.Interfaces;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CalculatorCore.Visitors
 {
-    internal class InfixVisitor : AryNodeVisitor
+    internal class InfixVisitor : IAryNodeVisitor
     {
         public StringBuilder Inorder { get; private set; } = new();
-        public override void Visit(NullaryExpressionTreeNode node)
+        public void Visit(NullaryExpressionTreeNode node)
         {
             Inorder.Append(node.Text);
         }
 
-        public override void Visit(UnaryExpressionTreeNode node)
+        public void Visit(UnaryExpressionTreeNode node)
         {
             Inorder.Append(node.Text);
-            Inorder.Append(" ");
+            Inorder.Append(' ');
             node.Child!.AryNodeAccept(this);
         }
 
-        public override void Visit(BinaryExpressionTreeNode node)
+        public void Visit(BinaryExpressionTreeNode node)
         {
             node.Left!.AryNodeAccept(this);
-            Inorder.Append(" ");
+            Inorder.Append(' ');
             Inorder.Append(node.Text);
-            Inorder.Append(" ");
+            Inorder.Append(' ');
             node.Right!.AryNodeAccept(this);
         }
     }

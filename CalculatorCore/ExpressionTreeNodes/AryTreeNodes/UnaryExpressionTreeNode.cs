@@ -1,4 +1,5 @@
 ﻿using CalculatorCore.Abstracts;
+using CalculatorCore.Interfaces;
 namespace CalculatorCore.ExpressionTreeNodes.AryTreeNodes
 {
     internal class UnaryExpressionTreeNode : ExpressionTreeNode
@@ -10,7 +11,7 @@ namespace CalculatorCore.ExpressionTreeNodes.AryTreeNodes
             Child = child;
         }
         public UnaryExpressionTreeNode(UnaryExpressionTreeNode node) : base(node.TextFormula, node.Text, node.Value) { }
-        public override void RealNodeAccept(RealNodeVisitor visitor) { }
-        public override void AryNodeAccept(AryNodeVisitor visitor) => visitor.Visit(this);
+        public override void RealNodeAccept(IRealNodeVisitor visitor) { }
+        public override void AryNodeAccept(IAryNodeVisitor visitor) => visitor.Visit(this);
     }
 }

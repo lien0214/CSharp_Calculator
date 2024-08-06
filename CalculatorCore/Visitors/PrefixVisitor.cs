@@ -1,30 +1,30 @@
-﻿using CalculatorCore.Abstracts;
-using CalculatorCore.ExpressionTreeNodes.AryTreeNodes;
+﻿using CalculatorCore.ExpressionTreeNodes.AryTreeNodes;
+using CalculatorCore.Interfaces;
 using System.Text;
 
 namespace CalculatorCore.Visitors
 {
-    internal class PrefixVisitor : AryNodeVisitor
+    internal class PrefixVisitor : IAryNodeVisitor
     {
         public StringBuilder Preorder { get ; private set; } = new();
-        public override void Visit(NullaryExpressionTreeNode node)
+        public void Visit(NullaryExpressionTreeNode node)
         {
             Preorder.Append(node.Text);
         }
 
-        public override void Visit(UnaryExpressionTreeNode node)
+        public void Visit(UnaryExpressionTreeNode node)
         {
             Preorder.Append(node.Text);
-            Preorder.Append(" ");
+            Preorder.Append(' ');
             node.Child!.AryNodeAccept(this);
         }
 
-        public override void Visit(BinaryExpressionTreeNode node)
+        public void Visit(BinaryExpressionTreeNode node)
         {
             Preorder.Append(node.Text);
-            Preorder.Append(" ");
+            Preorder.Append(' ');
             node.Left!.AryNodeAccept(this);
-            Preorder.Append(" ");
+            Preorder.Append(' ');
             node.Right!.AryNodeAccept(this);
         }
     }

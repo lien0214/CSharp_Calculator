@@ -138,7 +138,7 @@ namespace CalculatorCore
         /// <param name="op1">Operand on left-hand side</param>
         /// <param name="op2">Operand on right-hand side</param>
         /// <returns>return the precedence subtraction of two operators.</returns>
-        public static int OperatorCompare(char op1, char op2)
+        public int OperatorCompare(char op1, char op2)
         {
             Dictionary<char, int> OperatorPrecedence = new()
             {
@@ -163,7 +163,7 @@ namespace CalculatorCore
         /// </summary>
         public void MergeBinary()
         {
-            ExpressionTreeNode op = OperatorList[OperatorList.Count - 1];
+            ExpressionTreeNode op = OperatorList[^1];
             OperatorList.RemoveAt(OperatorList.Count - 1);
 
             ExpressionTreeNode right = NodeList[^1];

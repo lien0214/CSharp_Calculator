@@ -1,5 +1,5 @@
-﻿using CalculatorCore.Abstracts;
-using CalculatorCore.ExpressionTreeNodes.AryTreeNodes;
+﻿using CalculatorCore.ExpressionTreeNodes.AryTreeNodes;
+using CalculatorCore.Interfaces;
 
 namespace CalculatorCore.ExpressionTreeNodes.RealTreeNodes
 {
@@ -8,7 +8,7 @@ namespace CalculatorCore.ExpressionTreeNodes.RealTreeNodes
         public NumberTreeNode(string textFormula, string text, decimal value)
             : base(textFormula, text, value) { }
         public NumberTreeNode(NumberTreeNode node) : base(node) { }
-        public override void RealNodeAccept(RealNodeVisitor visitor)
+        public override void RealNodeAccept(IRealNodeVisitor visitor)
         {
             visitor.Visit(this);
         }
