@@ -1,0 +1,23 @@
+﻿using CalculatorCore.Abstracts;
+namespace CalculatorCore.ExpressionTreeNodes.AryTreeNodes
+{
+    internal class BinaryExpressionTreeNode : ExpressionTreeNode
+    {
+        public ExpressionTreeNode? Left { get; set; }
+        public ExpressionTreeNode? Right { get; set; }
+        public BinaryExpressionTreeNode(string textFormula, string text, decimal value, ExpressionTreeNode? left, ExpressionTreeNode? right)
+            : base(textFormula, text, value)
+        {
+            Left = left;
+            Right = right;
+        }
+        public BinaryExpressionTreeNode(BinaryExpressionTreeNode node) : base(node.TextFormula, node.Text, node.Value)
+        {
+            Left = node.Left;
+            Right = node.Right;
+        }
+
+        public override void RealNodeAccept(RealNodeVisitor visitor) { }
+        public override void AryNodeAccept(AryNodeVisitor visitor) => visitor.Visit(this);
+    }
+}
