@@ -1,33 +1,33 @@
 # Calculator
 
-**Calculator** 是一個完整的計算器應用程式，包含 API 、 Core 和 UI 。專案由以下部分組成：
+**Calculator** is a complete calculator application featuring an API, Core, and UI components. The project is composed of the following parts:
 
-1. [CalculatorAPI](CalculatorAPI/README.md) - 提供計算器功能的 API 端點
-2. [CalculatorCore](CalculatorCore/README.md) - 包含計算器的核心邏輯
-3. [CalculatorForm](CalculatorForm/README.md) - 用戶端應用程式，提供計算器的圖形用戶介面
+1. [CalculatorAPI](CalculatorAPI/README.md) - Provides the API endpoints for calculator functionalities.
+2. [CalculatorCore](CalculatorCore/README.md) - Contains the core logic for the calculator.
+3. [CalculatorForm](CalculatorForm/README.md) - A client-side application providing a graphical user interface for the calculator.
 
 ## Quick Start
 
-### 安裝
+### Installation
 
-要運行這個專案，您需要在您的機器上安裝 .NET SDK。
+To run this project, you need to install the .NET SDK on your machine.
 
-### 運行專案的步驟
+### Steps to run the project
 
-1. 將此存儲庫克隆到您的本地機器：
+1. Clone this repository to your local machine:
 ```sh
-git clone http://192.168.10.147:8080/lien0214/calculator.git
-cd ./Calculator05/
+git clone https://github.com/lien0214/CSharp_Calculator.git
+cd ./Calculator/
 ```
-2. 還原 dotnet 依賴項：
+2. Restore dotnet dependencies:
 ```sh
 dotnet restore
 ```
-3. 運行測試以確保一切正確設置：
+3. Run tests to ensure everything is set up correctly:
 ```sh
 dotnet test
 ```
-4. 運行專案：
+4. Run the project:
 ```sh
 dotnet run
 ```
