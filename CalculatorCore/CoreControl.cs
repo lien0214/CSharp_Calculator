@@ -6,7 +6,7 @@ namespace CalculatorCore
     /// <summary>
     /// Manages the core functionality of the calculator, including state transitions and input handling.
     /// </summary>
-    public class CoreController
+    public class CoreControl
     {
         /// <summary>
         /// Gets the current context of the calculator which includes its state.
@@ -25,7 +25,7 @@ namespace CalculatorCore
         /// <summary>
         /// Initializes a new instance of the CoreController class.
         /// </summary>
-        public CoreController()
+        public CoreControl()
         {
             Context = new CoreContext();
         }

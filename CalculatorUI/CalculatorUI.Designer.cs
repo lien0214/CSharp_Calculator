@@ -46,7 +46,7 @@ namespace Calculator
 
         
         // Define Controller
-        private UIController UIController = new UIController();
+        private UIControl UIController = new UIControl();
         // Define the components of the form
         private Label OutputLabel;
         private Label InputLabel;

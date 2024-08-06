@@ -7,7 +7,7 @@ namespace CalculatorCore.Clicks
     /// </summary>
     public class ClearClick : IClick
     {
-        public UIContext Click(CoreController coreController, string buttonText)
+        public UIContext Click(CoreControl coreController, string buttonText)
         {
             return coreController.EnterClear();
         }

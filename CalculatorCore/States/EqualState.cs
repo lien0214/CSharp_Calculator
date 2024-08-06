@@ -7,13 +7,13 @@ namespace CalculatorCore.States
 {
     internal class EqualState : IState
     {
-        public void EnterDigitDot(CoreController core, char digitDot)
+        public void EnterDigitDot(CoreControl core, char digitDot)
         {
             core.Context.EqualClear();
             core.Context.Input = StringHandling.AppendDigitDot(core.Context.Input, digitDot);
             core.TransitionTo(StateType.NumberState);
         }
-        public void EnterOperator(CoreController core, char op)
+        public void EnterOperator(CoreControl core, char op)
         {
             NumberTreeNode numberNode = new(string.Empty, core.Context.Input, core.Context.InputDecimal);
             core.Context.EqualClear();
@@ -23,7 +23,7 @@ namespace CalculatorCore.States
             core.Context.Output = core.Context.GetOutput();
             core.TransitionTo(StateType.BinaryOperationState);
         }
-        public void EnterSquareRoot(CoreController core)
+        public void EnterSquareRoot(CoreControl core)
         {
             NumberTreeNode numberNode = new(string.Empty, core.Context.Input, core.Context.InputDecimal);
             decimal rootValue = MathHandling.Sqrt(core.Context.InputDecimal);
@@ -34,7 +34,7 @@ namespace CalculatorCore.States
             core.Context.Output = core.Context.GetOutput();
             core.TransitionTo(StateType.UnaryOperationState);
         }
-        public void EnterEqual(CoreController core)
+        public void EnterEqual(CoreControl core)
         {
             NumberTreeNode numberNode = new(string.Empty, core.Context.Input, core.Context.InputDecimal);
             core.Context.EqualClear();
@@ -44,22 +44,22 @@ namespace CalculatorCore.States
             core.Context.Output = core.Context.GetOutput();
             core.TransitionTo(StateType.EqualState);
         }
-        public void EnterBackspace(CoreController core)
+        public void EnterBackspace(CoreControl core)
         {
             var input = core.Context.Input;
             core.Context.EqualClear();
             core.Context.Input = input;
             core.TransitionTo(StateType.EqualState);
         }
-        public void EnterClear(CoreController core)
+        public void EnterClear(CoreControl core)
         {
             core.Context.Clear();
         }
-        public void EnterClearEntry(CoreController core)
+        public void EnterClearEntry(CoreControl core)
         {
             core.Context.EqualClear();
         }
-        public void EnterNegate(CoreController core)
+        public void EnterNegate(CoreControl core)
         {
             NumberTreeNode childNode = new(string.Empty, core.Context.Input, core.Context.InputDecimal);
             decimal negateValue = -core.Context.InputDecimal;
@@ -70,7 +70,7 @@ namespace CalculatorCore.States
             core.Context.Output = core.Context.GetOutput();
         }
 
-        public void EnterLeftParenthesis(CoreController core)
+        public void EnterLeftParenthesis(CoreControl core)
         {
             string input = core.Context.Input;
             core.Context.EqualClear();
@@ -81,7 +81,7 @@ namespace CalculatorCore.States
             core.TransitionTo(StateType.InitialState);
         }
 
-        public void EnterRightParenthesis(CoreController core)
+        public void EnterRightParenthesis(CoreControl core)
         {
             string input = core.Context.Input;
             core.Context.EqualClear();

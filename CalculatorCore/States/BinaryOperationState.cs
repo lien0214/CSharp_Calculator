@@ -6,12 +6,12 @@ namespace CalculatorCore.States
 {
     internal class BinaryOperationState : IState
     {
-        public void EnterDigitDot(CoreController core, char digitDot)
+        public void EnterDigitDot(CoreControl core, char digitDot)
         {
             core.Context.Input = StringHandling.AppendDigitDot(Constants.ZERO, digitDot);
             core.TransitionTo(StateType.NumberState);
         }
-        public void EnterOperator(CoreController core, char op)
+        public void EnterOperator(CoreControl core, char op)
         {
             bool isBinary = core.Context.NodeList[^1] is BinaryExpressionTreeNode;
             if (isBinary && core.Context.OperatorCompare(core.Context.NodeList[^1].Text[0], op) > 0)
@@ -40,7 +40,7 @@ namespace CalculatorCore.States
             core.Context.Output = core.Context.GetOutput();
             core.TransitionTo(StateType.BinaryOperationState);
         }
-        public void EnterSquareRoot(CoreController core)
+        public void EnterSquareRoot(CoreControl core)
         {
             NumberTreeNode numberNode = new(string.Empty, core.Context.Input, core.Context.InputDecimal);
             decimal rootValue;
@@ -61,7 +61,7 @@ namespace CalculatorCore.States
             core.Context.Output = core.Context.GetOutput();
             core.TransitionTo(StateType.UnaryOperationState);
         }
-        public void EnterEqual(CoreController core)
+        public void EnterEqual(CoreControl core)
         {
             core.Context.NumberNodePush();
             try
@@ -80,21 +80,21 @@ namespace CalculatorCore.States
             core.Context.Output = core.Context.GetOutput();
             core.TransitionTo(StateType.EqualState);
         }
-        public void EnterBackspace(CoreController core)
+        public void EnterBackspace(CoreControl core)
         {
             // Do nothing
         }
-        public void EnterClear(CoreController core)
+        public void EnterClear(CoreControl core)
         {
             core.Context.Clear();
             core.TransitionTo(StateType.InitialState);
         }
-        public void EnterClearEntry(CoreController core)
+        public void EnterClearEntry(CoreControl core)
         {
             core.Context.Input = Constants.ZERO;
             core.TransitionTo(StateType.InitialState);
         }
-        public void EnterNegate(CoreController core)
+        public void EnterNegate(CoreControl core)
         {
             NumberTreeNode numberNode = new(string.Empty, core.Context.Input, core.Context.InputDecimal);
             NegateTreeNode negateNode = new(string.Empty, Constants.MINUS.ToString(), -core.Context.InputDecimal, numberNode);
@@ -104,7 +104,7 @@ namespace CalculatorCore.States
             core.TransitionTo(StateType.UnaryOperationState);
         }
 
-        public void EnterLeftParenthesis(CoreController core)
+        public void EnterLeftParenthesis(CoreControl core)
         {
             core.Context.OperatorList.Add(new BinaryExpressionTreeNode(string.Empty, Constants.LEFT_PARENTHESIS.ToString(), 0, null, null));
             core.Context.NetParenthesesCount++;
@@ -113,7 +113,7 @@ namespace CalculatorCore.States
             core.TransitionTo(StateType.InitialState);
         }
 
-        public void EnterRightParenthesis(CoreController core)
+        public void EnterRightParenthesis(CoreControl core)
         {
             if (core.Context.NetParenthesesCount == 0)
             {

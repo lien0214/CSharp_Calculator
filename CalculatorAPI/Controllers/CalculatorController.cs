@@ -38,8 +38,8 @@ namespace CalculatorAPI.Controllers
             { "±", new NegateClick() }
         };
         private readonly ILogger<CalculatorController> _logger;
-        private readonly CoreController CoreController;
-        public CalculatorController(ILogger<CalculatorController> logger, CoreController coreController, UIContext formContext)
+        private readonly CoreControl CoreController;
+        public CalculatorController(ILogger<CalculatorController> logger, CoreControl coreController, UIContext formContext)
         {
             _logger = logger;
             CoreController = coreController;

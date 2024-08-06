@@ -11,6 +11,6 @@
         /// </summary>
         /// <param name="context">The context of the calculator.</param>
         /// <param name="buttonText">The text of the button that was clicked.</param>
-        public UIContext Click(CoreController coreController, string buttonText);
+        public UIContext Click(CoreControl coreController, string buttonText);
     }
 }

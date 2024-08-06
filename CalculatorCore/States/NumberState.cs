@@ -6,12 +6,12 @@ namespace CalculatorCore.States
 {
     internal class NumberState : IState
     {
-        public void EnterDigitDot(CoreController core, char digitDot)
+        public void EnterDigitDot(CoreControl core, char digitDot)
         {
             core.Context.Input = StringHandling.AppendDigitDot(core.Context.Input, digitDot);
             core.TransitionTo(StateType.NumberState);
         }
-        public void EnterOperator(CoreController core, char op)
+        public void EnterOperator(CoreControl core, char op)
         {
             core.Context.NumberNodePush();
             while (core.Context.OperatorList.Count > 0 && core.Context.OperatorCompare(core.Context.OperatorList[^1].Text[0], op) <= 0)
@@ -33,7 +33,7 @@ namespace CalculatorCore.States
             core.Context.Output = core.Context.GetOutput();
             core.TransitionTo(StateType.BinaryOperationState);
         }
-        public void EnterSquareRoot(CoreController core)
+        public void EnterSquareRoot(CoreControl core)
         {
             NumberTreeNode numberNode = new(string.Empty, core.Context.Input, core.Context.InputDecimal);
             decimal rootValue;
@@ -54,7 +54,7 @@ namespace CalculatorCore.States
             core.Context.Output = core.Context.GetOutput();
             core.TransitionTo(StateType.UnaryOperationState);
         }
-        public void EnterEqual(CoreController core)
+        public void EnterEqual(CoreControl core)
         {
             core.Context.NumberNodePush();
             try
@@ -72,28 +72,28 @@ namespace CalculatorCore.States
             core.Context.Output = core.Context.GetOutput();
             core.TransitionTo(StateType.EqualState);
         }
-        public void EnterBackspace(CoreController core)
+        public void EnterBackspace(CoreControl core)
         {
             core.Context.Input = StringHandling.Backspace(core.Context.Input);
             core.TransitionTo(StateType.NumberState);
         }
-        public void EnterClear(CoreController core)
+        public void EnterClear(CoreControl core)
         {
             core.Context.Clear();
             core.TransitionTo(StateType.InitialState);
         }
-        public void EnterClearEntry(CoreController core)
+        public void EnterClearEntry(CoreControl core)
         {
             core.Context.Input = Constants.ZERO;
             core.TransitionTo(StateType.InitialState);
         }
-        public void EnterNegate(CoreController core)
+        public void EnterNegate(CoreControl core)
         {
             core.Context.Input = StringHandling.AppendNegative(core.Context.Input);
             core.TransitionTo(StateType.NumberState);
         }
 
-        public void EnterLeftParenthesis(CoreController core)
+        public void EnterLeftParenthesis(CoreControl core)
         {
             core.Context.NumberNodePush();
             while (core.Context.OperatorList.Count > 0 && core.Context.OperatorCompare(core.Context.OperatorList[^1].Text[0], Constants.MULTIPLY) <= 0)
@@ -117,7 +117,7 @@ namespace CalculatorCore.States
             core.TransitionTo(StateType.InitialState);
         }
 
-        public void EnterRightParenthesis(CoreController core)
+        public void EnterRightParenthesis(CoreControl core)
         {
             if (core.Context.NetParenthesesCount == 0)
             {

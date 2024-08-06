@@ -4,7 +4,7 @@ namespace CalculatorCore.States
 {
     internal class ErrorState : IState
     {
-        public void EnterDigitDot(CoreController core, char digit)
+        public void EnterDigitDot(CoreControl core, char digit)
         {
             core.Context.Clear();
             if (digit == Constants.DOT[0])
@@ -14,45 +14,45 @@ namespace CalculatorCore.States
             core.Context.Input = StringHandling.AppendDigit(core.Context.Input, digit);
             core.TransitionTo(StateType.NumberState);
         }
-        public void EnterOperator(CoreController core, char op)
+        public void EnterOperator(CoreControl core, char op)
         {
             throw new NotImplementedException();
         }
-        public void EnterSquareRoot(CoreController core)
+        public void EnterSquareRoot(CoreControl core)
         {
             throw new NotImplementedException();
         }
-        public void EnterEqual(CoreController core)
+        public void EnterEqual(CoreControl core)
         {
             core.Context.Clear();
             core.TransitionTo(StateType.InitialState);
         }
-        public void EnterBackspace(CoreController core)
+        public void EnterBackspace(CoreControl core)
         {
             core.Context.Clear();
             core.TransitionTo(StateType.InitialState);
         }
-        public void EnterClear(CoreController core)
+        public void EnterClear(CoreControl core)
         {
             core.Context.Clear();
             core.TransitionTo(StateType.InitialState);
         }
-        public void EnterClearEntry(CoreController core)
+        public void EnterClearEntry(CoreControl core)
         {
             core.Context.Clear();
             core.TransitionTo(StateType.InitialState);
         }
-        public void EnterNegate(CoreController core)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void EnterLeftParenthesis(CoreController core)
+        public void EnterNegate(CoreControl core)
         {
             throw new NotImplementedException();
         }
 
-        public void EnterRightParenthesis(CoreController core)
+        public void EnterLeftParenthesis(CoreControl core)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EnterRightParenthesis(CoreControl core)
         {
             throw new NotImplementedException();
         }

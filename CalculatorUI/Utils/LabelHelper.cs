@@ -22,6 +22,7 @@
                 Location = location
             };
         }
+
         /// <summary>
         /// Updates the text displayed on the label.
         /// </summary>

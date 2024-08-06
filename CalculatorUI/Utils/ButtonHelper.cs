@@ -22,9 +22,13 @@ namespace Calculator.Utils
                 Tag = action
             };
         }
+
         /// <summary>
         /// Render the button on the form.
         /// </summary>
+        /// <param name="buttons">A dictionary of buttons to render.</param>
+        /// <param name="enables">A dictionary of button enabled states.</param>
+        /// <param name="buttonText">The text of the button to render.</param>
         public static void Render(Dictionary<string, Button> buttons, Dictionary<string, bool> enables, string buttonText)
         {
             // Set the visibility of the "C" button
@@ -36,12 +40,8 @@ namespace Calculator.Utils
             {
                 buttons["C"].Visible = false;
             }
-            // Set the enabled state of the operator buttons
-            SetButtonsEnabled(buttons, enables);
-        }
 
-        private static void SetButtonsEnabled(Dictionary<string, Button> buttons, Dictionary<string, bool> enables)
-        {
+            // Set the enabled state of the operator buttons
             foreach (var key in enables.Keys)
             {
                 buttons[key].Enabled = enables[key];
