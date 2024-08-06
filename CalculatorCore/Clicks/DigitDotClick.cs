@@ -7,9 +7,9 @@ namespace CalculatorCore.Clicks
     /// </summary>
     public class DigitDotClick : IClick
     {
-        public UIContext Click(CoreControl coreController, string buttonText)
+        public UIContext Click(CoreControl coreControl, string buttonText)
         {
-            return coreController.EnterDigitDot(buttonText[0]);
+            return coreControl.EnterDigitDot(buttonText[0]);
         }
     }
 }

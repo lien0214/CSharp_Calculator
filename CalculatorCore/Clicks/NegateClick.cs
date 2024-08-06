@@ -7,9 +7,9 @@ namespace CalculatorCore.Clicks
     /// </summary>
     public class NegateClick : IClick
     {
-        public UIContext Click(CoreControl coreController, string buttonText)
+        public UIContext Click(CoreControl coreControl, string buttonText)
         {
-            return coreController.EnterNegate();
+            return coreControl.EnterNegate();
         }
     }
 }

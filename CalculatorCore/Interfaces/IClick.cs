@@ -7,10 +7,11 @@
     public interface IClick
     {
         /// <summary>
-        /// Handles the click event for a calculator button.
+        /// Method for handling button clicks.
         /// </summary>
-        /// <param name="context">The context of the calculator.</param>
-        /// <param name="buttonText">The text of the button that was clicked.</param>
-        public UIContext Click(CoreControl coreController, string buttonText);
+        /// <param name="coreControl">Core manager to call</param>
+        /// <param name="buttonText">Input text</param>
+        /// <returns></returns>
+        public UIContext Click(CoreControl coreControl, string buttonText);
     }
 }

@@ -7,9 +7,9 @@ namespace CalculatorCore.Clicks
     /// </summary>
     public class OperatorClick : IClick
     {
-        public UIContext Click(CoreControl coreController, string buttonText)
+        public UIContext Click(CoreControl coreControl, string buttonText)
         {
-            return coreController.EnterOperator(buttonText[0]);
+            return coreControl.EnterOperator(buttonText[0]);
         }
     }
 }

@@ -4,9 +4,9 @@ namespace CalculatorCore.Clicks
 {
     public class BackspaceClick : IClick
     {
-        public UIContext Click(CoreControl coreController, string buttonText)
+        public UIContext Click(CoreControl coreControl, string buttonText)
         {
-            return coreController.EnterBackspace();
+            return coreControl.EnterBackspace();
         }
     }
 }
