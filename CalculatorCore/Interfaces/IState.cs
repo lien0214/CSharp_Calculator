@@ -52,7 +52,16 @@
         /// <param name="coreControl">The coreControl of the calculator.</param>
         public void EnterNegate(CoreControl coreControl);
 
+        /// <summary>
+        /// Handles the input of the left parenthesis command.
+        /// </summary>
+        /// <param name="coreControl"></param>
         public void EnterLeftParenthesis(CoreControl coreControl);
+
+        /// <summary>
+        /// Handles the input of the right parenthesis command.
+        /// </summary>
+        /// <param name="coreControl"></param>
         public void EnterRightParenthesis(CoreControl coreControl);
     }
 }
